@@ -1,0 +1,148 @@
+<!doctype html>
+<html class="no-js">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Zoo Admin后台</title>
+    <meta name="description" content="Zoo Admin，方便的查看zookeeper的节点和节点数据，快捷的添加、删除和级联删除节点，快捷的编辑节点数据，目前只支持文本数据">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="Cache-Control" content="no-siteapp"/>
+    <link rel="icon" type="image/png" href="${host}/assets/i/favicon.png">
+    <meta name="apple-mobile-web-app-title" content="Zoo Admin"/>
+    <link rel="stylesheet" href="${host}/assets/css/amazeui.min.css"/>
+    <link rel="stylesheet" href="${host}/assets/css/admin.css">
+    <!--[if lt IE 9]>
+    <script src="http://libs.baidu.com/jquery/1.11.1/jquery.min.js"></script>
+    <script src="http://cdn.staticfile.org/modernizr/2.8.3/modernizr.js"></script>
+    <script src="${host}/assets/js/amazeui.ie8polyfill.min.js"></script>
+    <![endif]-->
+
+    <!--[if (gte IE 9)|!(IE)]><!-->
+    <script src="${host}/assets/js/jquery.min.js"></script>
+    <!--<![endif]-->
+    <script src="${host}/assets/js/amazeui.min.js"></script>
+    <script src="${host}/assets/js/app.js"></script>
+    <script src="${host}/layer/layer.js"></script>
+</head>
+<body>
+<!--[if lte IE 9]>
+<p class="browsehappy">你正在使用<strong>过时</strong>的浏览器，Amaze UI 暂不支持。 请 <a href="http://browsehappy.com/" target="_blank">升级浏览器</a>
+    以获得更好的体验！</p>
+<![endif]-->
+
+<header class="am-topbar am-topbar-inverse admin-header">
+    <div class="am-topbar-brand">
+        <strong>Zoo Admin</strong>
+        <small>后台管理</small>
+    </div>
+
+    <div class="am-collapse am-topbar-collapse" id="topbar-collapse">
+
+        <ul class="am-nav am-nav-pills am-topbar-nav am-topbar-right admin-header-list">
+            <li class="am-dropdown" data-am-dropdown>
+                <a class="am-dropdown-toggle" data-am-dropdown-toggle href="javascript:;">
+                    <span class="am-icon-users"></span> 管理员 <span class="am-icon-caret-down"></span>
+                </a>
+                <ul class="am-dropdown-content">
+                    <li><a href="#"><span class="am-icon-cog"></span> 设置</a></li>
+                    <li><a href="${host}/logout.html"><span class="am-icon-power-off"></span> 退出</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</header>
+
+<div class="am-cf admin-main">
+
+    <!-- sidebar start -->
+    <div class="admin-sidebar am-offcanvas" id="admin-offcanvas">
+        <div class="am-offcanvas-bar admin-offcanvas-bar">
+            <ul class="am-list admin-sidebar-list">
+                <li><a href="${host}/node/index.html"><span class="am-icon-home"></span> 首页</a></li>
+                <li class="admin-parent">
+                    <a class="am-cf" data-am-collapse="{target: '#collapse-nav'}"><span class="am-icon-file"></span>
+                        页面模块 <span class="am-icon-angle-right am-fr am-margin-right"></span></a>
+                    <ul class="am-list am-collapse admin-sidebar-sub am-in" id="collapse-nav">
+                        <li><a href="${host}/node/index.html" class="am-cf"><span class="am-icon-check"></span>统计信息<span
+                                class="am-icon-star am-fr am-margin-right admin-icon-yellow"></span></a></li>
+                        <li><a href="${host}/help/index.html"><span class="am-icon-puzzle-piece"></span> 帮助页</a></li>
+                        <li><a href="admin-log.html"><span class="am-icon-calendar"></span> 系统日志</a></li>
+                    </ul>
+                </li>
+                <li><a href="#"><span class="am-icon-sign-out"></span> 注销</a></li>
+            </ul>
+
+            <div class="am-panel am-panel-default admin-sidebar-panel">
+                <div class="am-panel-bd">
+                    <p><span class="am-icon-tag"></span>wiki</p>
+                    <p>Welcome to the Zoo Admin</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- sidebar end -->
+
+    <!-- content start -->
+    <div class="admin-content">
+        <div class="admin-content-body">
+            <div class="am-cf am-padding am-padding-bottom-0">
+                <div class="am-fl am-cf">
+                    <strong class="am-text-primary am-text-lg">帮助页面</strong> /
+                    <small>Help Page</small>
+                </div>
+            </div>
+
+            <hr/>
+
+            <div class="am-g">
+
+                <div class="am-u-sm-12 am-u-sm-centered">
+                    <h2>Zoo Admin</h2>
+                    <p>在线 zookeeper管理工具</p>
+                    <p>方便的查看zookeeper的节点和节点数据；快捷的添加、删除和级联删除节点</p>
+                    <p>快捷的编辑节点数据，目前只支持文本数据；登陆权限控制</p>
+                    <hr/>
+                </div>
+
+                <div class="am-u-sm-12 am-u-sm-centered">
+                    <h2>Zoo Keeper 节点类型</h2>
+                    <p><strong>persistent</strong> : persistent节点不和特定的session绑定, 不会随着创建该节点的session的结束而消失, 而是一直存在,
+                        除非该节点被显式删除.</p>
+                    <p><strong>ephemeral</strong>：ephemeral节点是临时性的, 如果创建该节点的session结束了, 该节点就会被自动删除. ephemeral节点不能拥有子节点.
+                        虽然ephemeral节点与创建它的session绑定, 但只要该该节点没有被删除, 其他session就可以读写该节点中关联的数据. 使用-e参数指定创建ephemeral节点。</p>
+                    <p><strong>sequence</strong>：严格的说, sequence并非节点类型中的一种. sequence节点既可以是ephemeral的, 也可以是persistent的.
+                        创建sequence节点时, ZooKeeper server会在指定的节点名称后加上一个数字序列, 该数字序列是递增的. 因此可以多次创建相同的sequence节点, 而得到不同的节点.
+                        使用-s参数指定创建sequence节点</p>
+                    <hr/>
+                </div>
+
+                <div class="am-u-sm-12 am-u-sm-centered">
+                    <h2>Zoo Keeper Stat解释</h2>
+                    <p>
+                    <pre>
+hello # 节点内容，简单文本类型则直接显示，如果是引用类型，[]显示
+cZxid = 0x111 # 创建节点的zxid
+ctime = Thu Oct 06 20:25:20 CST 2016 #创建时间
+mZxid = 0x111
+mtime = Thu Oct 06 20:25:20 CST 2016 #修改时间
+pZxid = 0x111
+cversion = 0 # 子节点版本号
+dataVersion = 0 # 数据版本号，初始为0，每修改一次加1
+aclVersion = 0 #acl 版本号信息
+ephemeralOwner = 0x0 #如果该节点是临时节点 这表示为会话ID 否则为 0
+dataLength = 5 # 数据长度
+numChildren = 0 # 子节点数量
+                </pre>
+                    </p>
+                    <hr/>
+                </div>
+
+            </div>
+        </div>
+        <!-- content end -->
+    </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,3 @@
+com\baicai\core\PathFunc.class
+com\baicai\controller\html\HelpController.class
+com\baicai\core\AuthInterceptor.class

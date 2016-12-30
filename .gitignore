@@ -1,0 +1,45 @@
+*.class
+
+# Package Files #
+*.jar
+*.war
+*.ear
+
+*.pydevproject
+.project
+.metadata
+bin/**
+build/
+tmp/**
+tmp/**/*
+*.tmp
+*.bak
+*.swp
+*~.nib
+local.properties
+.classpath
+.settings/
+.loadpath
+
+# External tool builders
+.externalToolBuilders/
+
+# Locally stored "Eclipse launch configurations"
+*.launch
+
+# CDT-specific
+.cproject
+
+# PDT-specific
+.buildpath
+/bin
+
+# gradle
+.gradle
+
+# idea
+.idea/
+zookeeper-web.iml
+zookeeper-web.ipr
+zookeeper-web.iws
+

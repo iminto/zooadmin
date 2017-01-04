@@ -61,8 +61,6 @@ public class NodeController extends Controller{
 		setAttr("uptime", BaseTool.toDuration());
 		setAttr("nodes", nodes);
 		setAttr("data", zkData.getDataString());
-		setAttr("dataSize", zkData.getData()!=null?zkData.getData().length:0);
-		setAttr("data", zkData.getDataString());
 		setAttr("path", path);
 		setAttr("pathList", pathList);
 		Map<String, Object> statMap;

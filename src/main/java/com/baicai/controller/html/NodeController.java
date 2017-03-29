@@ -109,7 +109,7 @@ public class NodeController extends Controller{
 		try{
 			ZkClient zkClient=getSessionAttr("zk-client");
 			ZKPlugin zkPlugin=new ZKPlugin(zkClient);
-			if(path.startsWith("/zookeeper/")){
+			if(path.startsWith("/zookeeper/") || path.equals("/zookeeper")){
 				result.setMessage("系统保留节点，不允许删除");
 			}else {
 				zkPlugin.delete(path);
@@ -130,7 +130,7 @@ public class NodeController extends Controller{
 		try{
 		ZkClient zkClient=getSessionAttr("zk-client");
 		ZKPlugin zkPlugin=new ZKPlugin(zkClient);
-			if(path.startsWith("/zookeeper/")){
+			if(path.startsWith("/zookeeper/") || path.equals("/zookeeper")){
 				result.setMessage("系统保留节点，不允许删除");
 			}else {
 				zkPlugin.deleteRecursive(path);

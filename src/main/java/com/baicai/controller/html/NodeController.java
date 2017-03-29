@@ -109,11 +109,15 @@ public class NodeController extends Controller{
 		try{
 			ZkClient zkClient=getSessionAttr("zk-client");
 			ZKPlugin zkPlugin=new ZKPlugin(zkClient);
-			zkPlugin.delete(path);
-			result.setMessage("删除成功");
+			if(path.startsWith("/zookeeper/")){
+				result.setMessage("系统保留节点，不允许删除");
+			}else {
+				zkPlugin.delete(path);
+				result.setMessage("删除成功");
+			}
 		} catch (Exception e) {
 			result.setSuccess(false);
-			result.setMessage("删除失败");
+			result.setMessage("删除失败,原因："+e.getMessage());
 			log.error("删除失败,错误",e);
 		}
 
@@ -126,11 +130,15 @@ public class NodeController extends Controller{
 		try{
 		ZkClient zkClient=getSessionAttr("zk-client");
 		ZKPlugin zkPlugin=new ZKPlugin(zkClient);
-		zkPlugin.deleteRecursive(path);
-			result.setMessage("级联删除成功");
+			if(path.startsWith("/zookeeper/")){
+				result.setMessage("系统保留节点，不允许删除");
+			}else {
+				zkPlugin.deleteRecursive(path);
+				result.setMessage("级联删除成功");
+			}
 		} catch (Exception e) {
 			result.setSuccess(false);
-			result.setMessage("级联删除失败");
+			result.setMessage("级联删除失败，错误原因："+e.getMessage());
 			log.error("级联删除失败,错误",e);
 		}
 		renderJson(result);

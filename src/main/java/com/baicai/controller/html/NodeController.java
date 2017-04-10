@@ -32,9 +32,13 @@ public class NodeController extends Controller{
 	
 	@SuppressWarnings("unchecked")
 	public void index(){
-		String path=getPara("path");
-		if(StrKit.isBlank(path)) {
-			path="/";
+		String path="/";
+		String queryString=getRequest().getQueryString();
+		//此处不能直接 getPara,参数可能会被错误转义
+		if(queryString!=null && !("").equals(queryString)){
+			if(queryString.startsWith("path=")){
+				path=getRequest().getQueryString().substring("path=".length());
+			}
 		}
 		DecimalFormat df = new DecimalFormat("0.00") ;
 		long totalMem= Runtime.getRuntime().totalMemory();

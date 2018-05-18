@@ -10,6 +10,7 @@ Zoo Admin - 在线 zookeeper管理工具，基于Jfinal+Beetl开发。
 > * 快捷的添加、删除和级联删除节点
 > * 快捷的编辑节点数据，目前只支持文本数据
 > * 登陆权限控制
+> * zookeeper 四字命令的支持（待完善）
 
 Quick Start
 ==

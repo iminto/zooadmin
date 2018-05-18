@@ -39,8 +39,8 @@ local.properties
 
 # idea
 .idea/
-zookeeper-web.iml
-zookeeper-web.ipr
-zookeeper-web.iws
+zooadmin.iml
+zooadmin.ipr
+zooadmin.iws
 target/**
 

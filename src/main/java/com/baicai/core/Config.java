@@ -4,11 +4,11 @@ import com.baicai.controller.html.HelpController;
 import com.baicai.controller.html.IndexController;
 import com.baicai.controller.html.NodeController;
 import com.jfinal.config.*;
-import com.jfinal.core.JFinal;
 import com.jfinal.ext.handler.ContextPathHandler;
-import com.jfinal.kit.PathKit;
+import com.jfinal.template.Engine;
 import org.beetl.core.GroupTemplate;
-import org.beetl.ext.jfinal.BeetlRenderFactory;
+import org.beetl.ext.jfinal3.JFinal3BeetlRenderFactory;
+
 import java.util.HashMap;
 import java.util.Map;
 /**
@@ -20,9 +20,11 @@ import java.util.Map;
 public class Config extends JFinalConfig {
     public void configConstant(Constants me) {
         me.setDevMode(false);
-        me.setMainRenderFactory(new BeetlRenderFactory());
+        JFinal3BeetlRenderFactory rf = new JFinal3BeetlRenderFactory();
+        rf.config();
+        me.setRenderFactory(rf);
         // 获取GroupTemplate ,可置共享变量等操作
-        GroupTemplate group = BeetlRenderFactory.groupTemplate;
+        GroupTemplate group = rf.groupTemplate;
         Map<String, Object> shared = new HashMap<String, Object>();
         group.setSharedVars(shared);
     }
@@ -31,6 +33,11 @@ public class Config extends JFinalConfig {
         me.add("/", IndexController.class);
         me.add("/node", NodeController.class);
         me.add("/help", HelpController.class);
+    }
+
+    @Override
+    public void configEngine(Engine engine) {
+
     }
 
     public void configPlugin(Plugins me) {

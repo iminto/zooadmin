@@ -51,7 +51,7 @@ public class ZKPlugin implements IPlugin{
 
     public boolean exists(String path) {
         if (path == null || path.trim().equals("")) {
-            throw new IllegalArgumentException("path can not be null or empty");
+            throw new IllegalArgumentException("path can not be nu;l or empty");
         }
         return getClient().exists(path);
     }
@@ -62,6 +62,10 @@ public class ZKPlugin implements IPlugin{
         zkdata.setData(getClient().readData(getPath(path), stat));
         zkdata.setStat(stat);
         return zkdata;
+    }
+
+    public void getZk(){
+        client.getZooKeeper();
     }
 
     public List<String> getChildren(String path) {

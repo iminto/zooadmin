@@ -50,10 +50,11 @@ ul {
 }
 
 .admin-sidebar {
-  width: 260px;
+  width: 350px;
   min-height: 100%;
   float: left;
   border-right: 1px solid #cecece;
+  overflow-x: scroll;
 }
 
 .admin-sidebar.am-active {
@@ -105,7 +106,7 @@ ul {
 .admin-content,
 .admin-sidebar {
   height: 100%;
-  overflow-x: hidden;
+  overflow-x: scroll;
   overflow-y: scroll;
   -webkit-overflow-scrolling: touch;
 }

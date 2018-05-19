@@ -67,8 +67,12 @@ public class ZKPlugin implements IPlugin{
     }
 
     public String[] fetchServerConfig(){
+        String[] configList = new String[]{};
+        if(cxnStr==null){//session过期的时候可能为空
+            return configList;
+        }
         try {
-            if (configList == null) {
+            if (configList.length==0) {
                 String[] server = cxnStr.split(":");
                 String serverAddr = server[0];
                 Integer port = Integer.valueOf(server[1]);
@@ -76,7 +80,7 @@ public class ZKPlugin implements IPlugin{
                 telnet.connect();
                 String config = telnet.writeAndRead("conf");
                 telnet.close();
-                String[] configList = new String[]{};
+                configList = new String[]{};
                 if (config != null) {
                     configList = config.split(System.lineSeparator());
                 }
@@ -86,7 +90,7 @@ public class ZKPlugin implements IPlugin{
             }
         }catch (Exception e){
             log.error("获取zookeeper配置出错",e);
-            return new String[]{};
+            return configList;
         }
     }
 

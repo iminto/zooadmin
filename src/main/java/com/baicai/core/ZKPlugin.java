@@ -1,6 +1,7 @@
 package com.baicai.core;
 
 import com.baicai.entity.ZkData;
+import com.baicai.util.TelnetUtil;
 import com.github.zkclient.ZkClient;
 import com.jfinal.plugin.IPlugin;
 import org.apache.zookeeper.data.Stat;
@@ -17,9 +18,10 @@ import java.util.List;
 public class ZKPlugin implements IPlugin{
 
     protected  Logger log = (Logger) LoggerFactory.getLogger(this.getClass());
-    private String cxnStr;//连接字符串
+    private static String cxnStr;//连接字符串
     private  ZkClient client;
     private boolean isStarted = false;
+    private String[] configList;
 
     public ZKPlugin(String cxnStr) {
         this.cxnStr=cxnStr;
@@ -64,8 +66,28 @@ public class ZKPlugin implements IPlugin{
         return zkdata;
     }
 
-    public void getZk(){
-        client.getZooKeeper();
+    public String[] fetchServerConfig(){
+        try {
+            if (configList == null) {
+                String[] server = cxnStr.split(":");
+                String serverAddr = server[0];
+                Integer port = Integer.valueOf(server[1]);
+                TelnetUtil telnet = new TelnetUtil(serverAddr, port);
+                telnet.connect();
+                String config = telnet.writeAndRead("conf");
+                telnet.close();
+                String[] configList = new String[]{};
+                if (config != null) {
+                    configList = config.split(System.lineSeparator());
+                }
+                return configList;
+            } else {
+                return configList;
+            }
+        }catch (Exception e){
+            log.error("获取zookeeper配置出错",e);
+            return new String[]{};
+        }
     }
 
     public List<String> getChildren(String path) {

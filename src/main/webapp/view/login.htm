@@ -46,10 +46,10 @@
 
 			<form method="post" action="${host}/dologin.html" class="am-form">
 				<label for="addr">URL:</label> <input type="text" name="addr"
-					id="addr" value="" title="输入zookeeper地址."
-					placeholder="Connect String: host[:port][/namespace]"> <br>
+					id="addr" value="localhost:2181" title="输入zookeeper地址."
+					placeholder="Connect String: host[:port][/namespace]" autocomplete="off"> <br>
 				<label for="password">密码:</label> <input type="password" name="password"
-					id="password" value=""> <br> <label for="remember-me">
+					id="password" value="root"> <br> <label for="remember-me">
 					<input id="remember-me" type="checkbox"> 记住密码
 				</label> <br />
 				<div class="am-cf">

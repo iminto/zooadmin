@@ -36,6 +36,6 @@ waitfox@qq.com
 
 ------
 
-  [1]: http://localhost/index.html
+  [1]: http://localhost:9000
   [2]: ./doc/img/index.png
   [3]: ./doc/img/zoo-log.png

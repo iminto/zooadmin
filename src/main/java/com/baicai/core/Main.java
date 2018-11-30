@@ -10,10 +10,15 @@ import io.undertow.servlet.Servlets;
 import io.undertow.servlet.api.DeploymentInfo;
 import io.undertow.servlet.api.DeploymentManager;
 import io.undertow.servlet.api.FilterInfo;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import javax.servlet.DispatcherType;
 import java.io.File;
 
 public class Main {
+    protected static Logger log= LoggerFactory.getLogger(Main.class);
+
     public static void main(String[] args) throws Exception {
         DeploymentInfo servletBuilder = Servlets.deployment()
                 .setContextPath("/")
@@ -41,5 +46,6 @@ public class Main {
                 .build();
         // start server
         server.start();
+        log.info("http://"+host+":"+port);
     }
 }

@@ -1,5 +1,6 @@
 package com.baicai.core;
 
+import com.baicai.util.PropUtil;
 import com.jfinal.core.JFinalFilter;
 import io.undertow.Handlers;
 import io.undertow.Undertow;
@@ -26,12 +27,13 @@ public class Main {
         servletBuilder.addFilterUrlMapping("jfinal","/*", DispatcherType.FORWARD);
         servletBuilder.setResourceManager(new FileResourceManager(new File("src/main/webapp"), 1024));
 
+        Integer port= PropUtil.getInt("port");
         DeploymentManager manager = Servlets.defaultContainer().addDeployment(servletBuilder);
         manager.deploy();
         PathHandler path = Handlers.path(Handlers.redirect("/"))
                .addPrefixPath("/", manager.start());
         Undertow server = Undertow.builder()
-                .addHttpListener(1080, "localhost")
+                .addHttpListener(port, "localhost")
                 .setHandler(path)
                 .build();
         // start server

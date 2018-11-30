@@ -107,6 +107,7 @@ public class PropUtil {
      */
     public static int getInt(final String key) {
         final String val = getString(key);
+
         int i = -1;
         i = Integer.parseInt(val);
         return i;

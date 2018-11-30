@@ -20,20 +20,23 @@ public class Main {
                 .setClassLoader(Main.class.getClassLoader())
                 .setDeploymentName("zooadmin.war")
                 ;
+        Integer port= PropUtil.getInt("port");
+        String host=PropUtil.getString("host");
+        String resource=PropUtil.getString("resource");
         FilterInfo jfinalFilter=new FilterInfo("jfinal",JFinalFilter.class);
         jfinalFilter.addInitParam("configClass","com.baicai.core.Config");
         servletBuilder.addFilter(jfinalFilter);
         servletBuilder.addFilterUrlMapping("jfinal","/*", DispatcherType.REQUEST);
         servletBuilder.addFilterUrlMapping("jfinal","/*", DispatcherType.FORWARD);
-        servletBuilder.setResourceManager(new FileResourceManager(new File("src/main/webapp"), 1024));
+        servletBuilder.setResourceManager(new FileResourceManager(new File(resource), 1024));
 
-        Integer port= PropUtil.getInt("port");
+
         DeploymentManager manager = Servlets.defaultContainer().addDeployment(servletBuilder);
         manager.deploy();
         PathHandler path = Handlers.path(Handlers.redirect("/"))
                .addPrefixPath("/", manager.start());
         Undertow server = Undertow.builder()
-                .addHttpListener(port, "localhost")
+                .addHttpListener(port, host)
                 .setHandler(path)
                 .build();
         // start server

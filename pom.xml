@@ -162,7 +162,7 @@
 						</resourceBases>
 						<parentLoaderPriority>true</parentLoaderPriority>
 					</webApp>
-					<jvmArgs>-Xmx512m -Xms512m -XX:PermSize=128m -XX:MaxPermSize=196m</jvmArgs>
+					<jvmArgs>-Xmx384m -Xms384m -XX:PermSize=64m -XX:MaxPermSize=156m</jvmArgs>
 					<httpConnector>
 						<port>1080</port>
 					</httpConnector>

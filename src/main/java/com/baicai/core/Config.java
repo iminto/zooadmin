@@ -2,13 +2,13 @@ package com.baicai.core;
 
 import com.baicai.controller.html.HelpController;
 import com.baicai.controller.html.IndexController;
+import com.baicai.controller.html.MoniterController;
 import com.baicai.controller.html.NodeController;
 import com.jfinal.config.*;
 import com.jfinal.ext.handler.ContextPathHandler;
 import com.jfinal.template.Engine;
 import org.beetl.core.GroupTemplate;
 import org.beetl.ext.jfinal3.JFinal3BeetlRenderFactory;
-
 import java.util.HashMap;
 import java.util.Map;
 /**
@@ -33,6 +33,7 @@ public class Config extends JFinalConfig {
         me.add("/", IndexController.class);
         me.add("/node", NodeController.class);
         me.add("/help", HelpController.class);
+        me.add("/moniter", MoniterController.class);
     }
 
     @Override

@@ -64,10 +64,9 @@
                     <a class="am-cf" data-am-collapse="{target: '#collapse-nav'}"><span class="am-icon-file"></span>
                         页面模块 <span class="am-icon-angle-right am-fr am-margin-right"></span></a>
                     <ul class="am-list am-collapse admin-sidebar-sub am-in" id="collapse-nav">
-                        <li><a href="${host}/moniter/index.html" class="am-cf"><span class="am-icon-check"></span>监控信息</a></li>
+                        <li><a href="${host}/moniter/index.html" class="am-cf"><span class="am-icon-check"></span>监控信息<span class="am-icon-star am-fr am-margin-right admin-icon-yellow"></span></a></li>
                         <li><a href="${host}/help/index.html"><span class="am-icon-puzzle-piece"></span> 帮助页</a></li>
-                        <li><a href="${host}/help/log.html"><span class="am-icon-calendar"></span> ZK日志<span
-                                class="am-icon-star am-fr am-margin-right admin-icon-yellow"></span></a></li>
+                        <li><a href="${host}/help/log.html"><span class="am-icon-calendar"></span> ZK日志</a></li>
                     </ul>
                 </li>
             </ul>
@@ -87,8 +86,8 @@
         <div class="admin-content-body">
             <div class="am-cf am-padding am-padding-bottom-0">
                 <div class="am-fl am-cf">
-                    <strong class="am-text-primary am-text-lg">系统日志</strong> /
-                    <small>System log</small>
+                    <strong class="am-text-primary am-text-lg">监控页面</strong> /
+                    <small>Moniter Page</small>
                 </div>
             </div>
 
@@ -96,15 +95,37 @@
 
             <div class="am-g">
 
-                <div class="am-u-sm-12 am-u-sm-centered">
-                    <h2>事务日志（实验特性，仅支持读取本机日志）</h2>
-                    <p>
-                    <pre>
-${logString}
-                </pre>
-                    </p>
-                    <hr/>
+                <!-- 1栏开始 -->
+                <div class="am-u-md-12">
+                    <div class="am-panel am-panel-default">
+                        <div class="am-panel-hd am-cf"
+                             data-am-collapse="{target: '#collapse-panel-2'}">
+                            会话统计<span class="am-icon-chevron-down am-fr"></span>
+                        </div>
+                        <div id="collapse-panel-2" class="am-in">
+                            <table
+                                    class="am-table am-table-bd am-table-bdrs am-table-striped am-table-hover">
+                                <tbody>
+                                <tr>
+                                    <th class="am-text-center am-u-sm-1">#</th>
+                                    <th class="am-text-center am-u-sm-2 am-text-break">主机：端口</th>
+                                    <th class="am-u-sm-9">内容</th>
+                                </tr>
+                                <!--# for(child in zooSession){  -->
+                               <tr id="tr_m">
+                                    <td class="am-text-center am-u-sm-1">${child.id}</td>
+                                    <td class="am-text-center am-u-sm-2">${child.host}</td>
+                                    <td class="am-u-sm-9 am-text-break" style="width: 700px;display:block;">${child.detail}</td>
+                                </tr>
+                                <!--# }  -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
                 </div>
+                <!-- 1栏开始 -->
+
+
 
             </div>
         </div>

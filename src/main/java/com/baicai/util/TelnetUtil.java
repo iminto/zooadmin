@@ -53,7 +53,7 @@ public class TelnetUtil {
     public static void main(String[] args) throws IOException {
         TelnetUtil telnet = new TelnetUtil("localhost",2181);
         telnet.connect();
-        System.out.println(telnet.writeAndRead("conf"));
+        System.out.println(telnet.writeAndRead("envi"));
         telnet.close();
     }
 

@@ -21,7 +21,6 @@ public class ZKPlugin implements IPlugin{
     private static String cxnStr;//连接字符串
     private  ZkClient client;
     private boolean isStarted = false;
-    private String[] configList;
 
     public ZKPlugin(String cxnStr) {
         this.cxnStr=cxnStr;
@@ -67,30 +66,44 @@ public class ZKPlugin implements IPlugin{
     }
 
     public String[] fetchServerConfig(){
+        String config =fetchServerInfo("conf");
         String[] configList = new String[]{};
-        if(cxnStr==null){//session过期的时候可能为空
+        if(config.isEmpty()){
             return configList;
         }
+         configList = config.split(System.lineSeparator());
+         return configList;
+
+    }
+
+    public String[] fetchSessionList(){
+        String config =fetchServerInfo("cons");
+        String[] strList = new String[]{};
+        if(config.isEmpty()){
+            return strList;
+        }
+        strList = config.split(System.lineSeparator());
+        return strList;
+
+    }
+
+    public String fetchServerInfo(String cmd){
+        String info = "";
+        if(cxnStr==null){//session过期的时候可能为空
+            return "";
+        }
         try {
-            if (configList.length==0) {
                 String[] server = cxnStr.split(":");
                 String serverAddr = server[0];
                 Integer port = Integer.valueOf(server[1]);
                 TelnetUtil telnet = new TelnetUtil(serverAddr, port);
                 telnet.connect();
-                String config = telnet.writeAndRead("conf");
+                info = telnet.writeAndRead(cmd);
                 telnet.close();
-                configList = new String[]{};
-                if (config != null) {
-                    configList = config.split(System.lineSeparator());
-                }
-                return configList;
-            } else {
-                return configList;
-            }
+                return info;
         }catch (Exception e){
             log.error("获取zookeeper配置出错",e);
-            return configList;
+            return "";
         }
     }
 

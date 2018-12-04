@@ -25,7 +25,7 @@ Quick Start
 
 项目启动后，访问 [http://localhost:9000][1]，显示如下
 ![主页][2]
-![日志查看][3]
+![会话查看][3]
 默认用户名和密码均是root,密码可到user.properties文件中配置,默认启动端口也可到里面配置
 ------
 
@@ -38,4 +38,4 @@ waitfox@qq.com
 
   [1]: http://localhost:9000
   [2]: ./doc/img/index.png
-  [3]: ./doc/img/zoo-log.png
+  [3]: ./doc/img/session.png

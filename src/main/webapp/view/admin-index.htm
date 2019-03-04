@@ -124,19 +124,19 @@
                         子节点统计<span class="am-icon-chevron-down am-fr"></span>
                     </div>
                     <div id="collapse-panel-2" class="am-in">
-                        <table
+                        <table style="table-layout: fixed;margin-bottom:0px;"
                                 class="am-table am-table-bd am-table-bdrs am-table-striped am-table-hover">
                             <tbody>
                             <tr>
-                                <th class="am-text-center">#</th>
-                                <th>路径</th>
-                                <th>操作</th>
+                                <th style="width:40px">#</th>
+                                <th style="width:160px;word-break:break-all;word-wrap:break-word;">路径</th>
+                                <th style="width:100px">操作</th>
                             </tr>
                             <!--# for(child in nodes){  -->
                             <tr id="tr_k${childLP.index}">
-                                <td class="am-text-center">${childLP.index}</td>
-                                <td><a href="${host}/node/index.html?path=${child}">${path(child)}</a></td>
-                                <td>
+                                <td style="width:40px">${childLP.index}</td>
+                                <td style="width:160px;word-break:break-all;word-wrap:break-word;"><a href="${host}/node/index.html?path=${child}">${path(child)}</a></td>
+                                <td style="width:100px">
                                     <button name="dBtn" kpath="${child}" kid="${childLP.index}" class="am-btn am-btn-secondary am-btn-xs">删除</button>
                                     <button name="rdBtn" kpath="${child}" kid="${childLP.index}" class="am-btn am-btn-secondary am-btn-xs">级联删除</button>
                                 </td>

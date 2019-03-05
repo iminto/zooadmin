@@ -60,9 +60,14 @@ public class ZKPlugin implements IPlugin{
     public ZkData readData(String path) {
         ZkData zkdata = new ZkData();
         Stat stat = new Stat();
-        zkdata.setData(getClient().readData(getPath(path), stat));
-        zkdata.setStat(stat);
-        return zkdata;
+        try {
+            zkdata.setData(getClient().readData(getPath(path), stat));
+            zkdata.setStat(stat);
+            return zkdata;
+        }catch (Exception e){
+            log.error(path+"节点不存在",e);
+            return zkdata;
+        }
     }
 
     public String[] fetchServerConfig(){

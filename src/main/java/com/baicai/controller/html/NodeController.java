@@ -16,6 +16,7 @@ import org.slf4j.LoggerFactory;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -49,18 +50,18 @@ public class NodeController extends Controller {
         List<String> children = zkPlugin.getChildren(path);
         List<String> nodes = new ArrayList<>();
         String[] configList = zkPlugin.fetchServerConfig();
-
-        for (String child : children) {
-            if (!path.equals("/")) {
-                child = path + "/" + child;
-            } else {
-                child = "/" + child;
+        if(children!=null && children.size()>0) {
+            for (String child : children) {
+                if (!path.equals("/")) {
+                    child = path + "/" + child;
+                } else {
+                    child = "/" + child;
+                }
+                nodes.add(child);
             }
-            nodes.add(child);
         }
         List<String> pathList = BaseTool.splitPath(path, '/');
         ZkData zkData = zkPlugin.readData(path);
-        System.out.println("zkClient:" + zkClient);
         setAttr("totalMem", df.format(totalMem / 1000000F) + " MB");
         setAttr("maxMem", df.format(maxMem / 1000000F) + " MB");
         setAttr("freeMem", df.format(freeMem / 1000000F) + " MB");
@@ -70,12 +71,13 @@ public class NodeController extends Controller {
         setAttr("path", path);
         setAttr("pathList", pathList);
         setAttr("config",configList);
-        Map<String, Object> statMap;
+        Map<String, Object> statMap=new HashMap<>();
         try {
             statMap = BeanMapUtil.bean2Map(zkData.getStat());
             statMap.remove("class");
             setAttr("stat", statMap);
         } catch (Exception e) {
+            setAttr("stat", statMap);
             log.error("详情页错误", e);
             e.printStackTrace();
         }

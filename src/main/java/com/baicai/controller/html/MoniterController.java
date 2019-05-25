@@ -26,9 +26,14 @@ public class MoniterController extends Controller {
                 ZooConnection conn=new ZooConnection();
                 conn.setId(i+1);
                 String connectionStr=sessionList[i];
-                int index=connectionStr.indexOf("(");
-                String host=connectionStr.substring(0,index);
-                String detail=connectionStr.substring(index,connectionStr.length());
+                String host="";
+                String detail="";
+                if(connectionStr!=null && connectionStr.length()>1) {
+                    int index = connectionStr.indexOf("(");
+                    if(index==-1) index=0;
+                    host = connectionStr.substring(0, index>0?index:1);
+                    detail = connectionStr.substring(index, connectionStr.length());
+                }
                 conn.setHost(host);
                 conn.setDetail(detail);
                 zooSession.add(conn);

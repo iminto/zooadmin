@@ -105,6 +105,7 @@ public class ZKPlugin implements IPlugin{
                 telnet.connect();
                 info = telnet.writeAndRead(cmd);
                 telnet.close();
+                log.info("cmd......="+info);
                 return info;
         }catch (Exception e){
             log.error("获取zookeeper配置出错",e);
